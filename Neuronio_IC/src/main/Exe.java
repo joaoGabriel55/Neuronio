@@ -17,10 +17,9 @@ public class Exe {
 		Rede rede = new Rede();
 		rede.treinar(entry, saidaAnd);
 		
-		
 		Scanner entrada = new Scanner(System.in);
 		
-		int[] exemplo = new int[4];
+		int[] exemplo = new int[entry[0].length];
 
 		System.out.println("Digite " + entry[0].length + " atributos: ");
 		
@@ -34,17 +33,6 @@ public class Exe {
 			System.out.println("Resfriado");
 		else	
 			System.out.println("Gripe");
-		
-			
-		
-
-		
-		//if(exemplo == entry[])
-			
-		
-		
-		
-		
 	}
 
 }
