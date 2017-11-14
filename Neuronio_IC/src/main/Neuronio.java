@@ -1,40 +1,78 @@
 package main;
 
+import java.security.Permissions;
+import java.util.Random;
+
+/**
+ * Um neurorio é capaz de aprender coisas pela rede neural Com isso o essa
+ * classe torna-se padrão para qualquer que seja a problemática
+ * 
+ **/
 public class Neuronio {
 
 	private double[] peso; // Peso para cada entrada
-	private double valorInicial;
-	private double taxaAprendiz;
+	private double erro; // Taxa de erro para aprendizagem;
+	private final static double taxaAprendiz = 0.25;
+	private Random rand = new Random();
+	// Vetor entrada
+	// Recebe os dados da classe rede
+	private int[] entry;
 
-	public Neuronio(double[] peso, double valorInicial, double taxaAprendiz) {
-		super();
-		this.peso = peso;
-		this.valorInicial = valorInicial;
-		this.taxaAprendiz = taxaAprendiz;
+	// 0 ou 1
+	private int saida;
+
+	public Neuronio(int qtdEntradas) {
+
+		this.entry = new int[qtdEntradas];
+		this.peso = new double[qtdEntradas];
+
+		iniciarPeso();
 	}
 
-	public double[] getPeso() {
-		return peso;
+	public void iniciarPeso() {
+		for (int i = 0; i < peso.length; i++) {
+			peso[i] = rand.nextDouble();
+		}
 	}
 
-	public void setPeso(double[] peso) {
-		this.peso = peso;
+	public void calculaSaida() {
+
+		double somatorio = 0;
+
+		for (int i = 0; i < entry.length; i++) {
+			somatorio += entry[i] * peso[i];
+		}
+
+		if (somatorio > 0)
+			saida = 1;
+		else
+			saida = 0;
 	}
 
-	public double getValorInicial() {
-		return valorInicial;
+	public void refresh() {
+		// Wi_novo = Wi_atual + n*e*Xi
+		for (int i = 0; i < entry.length; i++) {
+			peso[i] = peso[i] + taxaAprendiz * erro * entry[i];
+		}
 	}
 
-	public void setValorInicial(double valorInicial) {
-		this.valorInicial = valorInicial;
+	public double getErro() {
+		return erro;
 	}
 
-	public double getTaxaAprendiz() {
-		return taxaAprendiz;
+	public void setErro(double saidaDesejada) {
+		this.erro = saidaDesejada - saida;
+
+		if (erro != 0)
+			refresh();
 	}
 
-	public void setTaxaAprendiz(double taxaAprendiz) {
-		this.taxaAprendiz = taxaAprendiz;
+	public int getSaida() {
+		return saida;
+	}
+
+	public void setEntry(int[] entry) {
+		this.entry = entry;
 	}
 
 }
