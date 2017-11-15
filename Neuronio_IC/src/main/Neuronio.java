@@ -1,10 +1,9 @@
 package main;
 
-import java.security.Permissions;
 import java.util.Random;
 
 /**
- * Um neurorio é capaz de aprender coisas pela rede neural Com isso o essa
+ * Um neurorio é capaz de aprender coisas pela rede neural Com isso essa
  * classe torna-se padrão para qualquer que seja a problemática
  * 
  **/
@@ -48,7 +47,10 @@ public class Neuronio {
 		else
 			saida = 0;
 	}
-
+	
+	/**
+	 * Corrige o erro, redefinindo os pesos
+	 * */
 	public void refresh() {
 		// Wi_novo = Wi_atual + n*e*Xi
 		for (int i = 0; i < entry.length; i++) {
