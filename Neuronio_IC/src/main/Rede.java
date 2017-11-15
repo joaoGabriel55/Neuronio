@@ -1,10 +1,10 @@
 package main;
+
 /**
- A rede serve para que tudo que for apresentado ao neuronio seja
- analisado de forma tal que ele possa aprender com os acertos 
- e erro igual a um ser humano. Como se fosse um controlador se
- analisamos pelo lado do MVC.
-**/
+ * A rede serve para que tudo que for apresentado ao neuronio seja analisado de
+ * forma tal que ele possa aprender com os acertos e erro igual a um ser humano.
+ * Como se fosse um controlador se analisamos pelo lado do MVC.
+ **/
 public class Rede {
 
 	private int qtdEntradas;
@@ -22,24 +22,22 @@ public class Rede {
 				neuronio.calculaSaida();
 				neuronio.setErro(saidaDesejada[i]);
 
-				Math.abs(erros += neuronio.getErro());
+				erros = erros + Math.abs((neuronio.getErro()));
 
-				//System.out.println(Math.abs(erros));
+				System.out.println(erros);
 			}
 
+			System.out.println("Erros totais: " + Math.abs(erros));
+
 		} while (erros != 0);
-		
-		System.out.println("Erros totais: "+Math.abs(erros));
+
 	}
 
 	public int executar(int[] exemplos) {
 		neuronio.setEntry(exemplos);
 		neuronio.calculaSaida();
 
-		if (neuronio.getSaida() > 0)
-			return 1;
-		else
-			return 0;
+		return neuronio.getSaida();
 	}
 
 }
